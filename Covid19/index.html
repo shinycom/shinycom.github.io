@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<!-- saved from url=(0074)file:///Users/depengyang/Desktop/myResume/Proj/COVID-19_Project%20copy.htm -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+   <!--
+      <script type="text/javascript" async="" src="./COVID-19 Projections Using Machine Learning_files/analytics.js"></script><script async="" src="./COVID-19 Projections Using Machine Learning_files/5fd614b8bd937f001265f4d9.js"></script><script type="text/javascript" async="" src="./COVID-19 Projections Using Machine Learning_files/analytics.js"></script><script async="" src="./COVID-19 Projections Using Machine Learning_files/js"></script>
+      -->
+
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-162990648-1');
+      </script>
+    
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#377878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="./COVID-19 Projections Using Machine Learning_files/style.css">
+
+<style>
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+</style>
+
+  </head>
+  <body>
+    <header class="page-header" role="banner">
+      <h1 class="project-name">San Deigo COVID19 Prediction</h1>
+      <h2 class="project-tagline">An artificial intelligence model to forecast infections and deaths of COVID-19 locally at San Diego</h2>
+      <!--
+        <a href="https://covid19-projections.com/" class="btn">Home</a>
+        <a href="https://covid19-projections.com/path-to-herd-immunity" class="btn">Path to Herd Immunity</a>
+        <a href="https://covid19-projections.com/#view-us-infections-estimates" class="btn">Infections / Vaccination Estimates</a>
+        <a href="https://covid19-projections.com/#us-counties-infections-estimates" class="btn">County Estimates</a>
+        <a href="https://covid19-projections.com/infections/summary-counties" class="btn">Counties Summary</a>
+        <a href="https://covid19-projections.com/maps-infections" class="btn">Maps</a>
+        <a href="https://covid19-projections.com/about" class="btn">About</a>
+        <a href="https://covid19-projections.com/contact" class="btn">Contact</a>
+        <a href="https://covid19-projections.com/donate" class="btn btn_donate">DONATE</a>
+    -->
+    </header>
+
+<main id="content" class="main-content" role="main">
+<!-- 
+<h1 id="model-details">Model details</h1>
+-->
+<h2 id="Background">Background and Motivation</h2> 
+
+<p>The sudden coming of COVID virus has changed the world. With Covid19 spreading over the world, data scientists and researchers are building more than <a href="https://github.com/CSSEGISandData/COVID-19"> 20 open source projects and machine learning models</a>, doing the best to predict trend of this global epidemic. We have found that SEIR is one of best models which shown capability to explain status and trend of Covid19 in perspective of distinct countries. This has shown a direct visualization of SEIR model.（https://gabgoh.github.io/COVID/index.html). By a simple drag and parameters tuning, we can see the curve is pretty mimic to realistic situation, which satisfied our demand for predicting local city epidemic.  </p>
+
+
+
+<h2 id="Source Data">Source Data</h2>
+
+The daily new cases data are collected from <a href="https://www.sandiegouniontribune.com/tracking-coronavirus-cases-san-diego-county"> "Tracking coronavirus data in San Diego County" </a>. We also downloaded accumulated and daily new cases of COVID19 in San diego, as well as daily death data. The data is cleaned and cross validated to make sure it is useful. The data also tested in other websites such as <a href="https://www.sandiegocounty.gov/content/sdc/hhsa/programs/phs/community_epidemiology/dc/2019-nCoV/status.html"> "san diego county.gov "</a>, <a href="https://www.latimes.com/projects/california-coronavirus-cases-tracking-outbreak/san-diego-county/"> "Tracking coronavirus in San Diego County" </a> and <a href="https://usafacts.org/visualizations/coronavirus-covid-19-spread-map/state/california/county/san-diego-county"> "USA facts" </a>. The cleaned data for model training are saved <a href="https://github.com/shinycom/SanDiego-Covid19-Prediction"> here.</a> Note that the reported daily cases is from 03/08/2020 to 04/17/2021, as of the end of this project.  
+
+
+<h2 id="Results">Results </h2>
+
+<p><img src="./COVID-19 Projections Using Machine Learning_files/finalPic.png" alt="Prediction Results" class="center"></p>
+
+<p> We plotted the predicted curve vs reported daily new cases of Covid19 in San Deigo County. In order to get better results, the model is running earlier than the first reported case in San Diego as we assuming the portential infected patient data are not collected or ignored at the very beginning stage. Notice that the reported data is fluctuated and full of noise because the delayed, misleading, and faulty cases are shown in the reported data. That is reality. The output data from the model has utilized convolution filter to smooth output curve and mimic the reported data, thus minimizing cost fuction and achieving the best prediction results. More details are shown in python codes <a href="https://github.com/shinycom/SanDiego-Covid19-Prediction">here</a>
+</p>
+
+<h2 id="Details">Model Details </h2>
+
+
+<p>Covid19 is essentiall a time serielas task. In order to predict Covid pandemic in San Diego, we utilized Susceptible-Exposed-Infectious-Recovered (SEIR) model. <a href="https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology"> Wiki </a> provides history and evolution of various caompartmental models in epidemiology. Essentially, this machine learning task is essentially a time series problem : at each time step (each day), we need to predict the number of new patients and deathes. There are four states : susceptible (E), exposed (E), infectious (I) and recovered (R), which are chained similar to a Makov Chain. An individual in a population at each day only stay in one of those four states and transit into another state in the next time step with a possibility. Population in each state is constrained with four differential equations. See <a href="http://epirecip.es/epicookbook/chapters/seir/intro">here</a> for equationa for detials. By tunning paramters, the prediction curve is able to model behavior of covid19 virus spread. <a href="https://gabgoh.github.io/COVID/index.html"> This interactive animation </a> illustrates the power of SEIR model. 
+
+<p>We have built and optimized a SEIR model <a href="https://github.com/shinycom/SanDiego-Covid19-Prediction">open source</a> for prediting COVID19 in San Diego. In detials, at beginning, all population stay in Susceptible(S) state. With a certain number of patients infected with virus introducted each day, some people get exposed (E). Then part becomes ill and infectious (I) after days. Eventually, a small potion of patients passed away while others got recovered (R). The population in each S/E/I/R state constrained by model equations under control of parameters. By tunning key paramters, we are driving SEIR model to mimic reality and then for prediction of the new cases and deathes in the next period. Note that the transition among S/E/I/R states have a probality distribution and the real data of new cases and deathes reported have some delay and noisy. We utilized a certain logic to handle such kinds of unvertainty in our codes for the best performance.  
+</p>
+
+<h2> Parameters </h2>
+
+<p>In order to achieve reported data in the real world, we have set more that 50 parameters in SEIR model within multiple stages combined together. However, there are basic input parameters to begin simulation in the first stage. Gabriel Goh’s <a href="https://gabgoh.github.io/COVID/index.html">Epidemic Calculator</a> or University of Basel’s <a href="https://covid19-scenarios.org/">covid19-scenarios.org</a> provide good visualizations of sample parameters in a simulation. Those are for an ideal case in a simple and close enviroment, which are not suitable for modeling situation in an open city. We utilized three SEIR models with different sets of parameters to mimic different situations such as grounded period or strict face mask policy. By tuning the parameters in the optimization period, we can train the model to achieve the best performance. </p>
+
+<h2 id="Training">Training</h2>
+
+<p>We have set three stages in the SEIR model. In each stage model, below variable parameters are the key in the model training: </p>
+<ul>
+  <li>R<sub>0</sub> - the most important reproduction number</li>
+  <li>Imports of positive cases per day</li>
+  <li>Mortality rate</li>
+  <li>Mitigation effects </li>
+  <li>Lockdown fatigue factor</li>
+  <li>Second stage R<sub>0</sub>, closure stage  reproduction R</li>
+  <li>Third  stage R<sub>0</sub>, post-reopening reproduction R</li>  
+</ul>
+<p>We cannot list all key parameters here. For more details and tunning techniques please refer to <a href="https://github.com/shinycom/SanDiego-Covid19-Prediction"> github codes</a> </p>
+
+
+<h2 id="summary">Summary</h2>
+
+
+<p>For an open San Diego county, we have set up SEIR model and run our optimizer on the reported data to mimic epidemic situation in our local city. Compared with real data, our optimized model is able to describle what had happened in past and what maybe happen in the future. After most people got vaccined, the situation will change. And that is our future work. </p>
+
+
+<!--
+
+<p> After some additional validation techniques described above, we aggregate the forecasts generated by each set of parameter, giving higher weights to parameters that have a lower error. This approach was inspired by the Monte Carlo method, allowing us to simulate the future while incorporating the inherent uncertainty. We now have our projections.</p>
+
+
+
+
+------ original source paraph ---
+For example, https://covid19-projections.com/model-details/ (If an individual is in the susceptible state, we can assume they are healthy but have no immunity. If they are in the exposed state, they have been infected with the virus but are not infectious. If they are infectious, they can actively transmit the disease. An individual who is infected ultimately either recovers or dies. We assume that a recovered individual’s chances of re-infection is low, but not zero. We can model the movement of individuals through these various states at each time period. The model’s exact specifications depend on its parameters, which we describe in the next section.
+For our SEIR implementation, we use a discrete-time state machine where each step is a day in the simulation. For each day, we have a probability distribution for which individuals in each S/E/I/R state may transition to another S/E/I/R state. For example, we have a probability distribution for when a currently-infected individual will transmit the virus, and another probability distribution for when an infected individual will succumb to the disease. These distributions are then convolved with the total existing cases to determine the number of new infections and new deaths per day. For new infections, we multiple the convolution by R0, while for deaths, we multiple the convolution by the mortality rate. )   </p>
+
+
+
+<p>To quickly summarize how an SEIR model works, at each time period, an individual in a population is in one of four states: susceptible (S), exposed (E), infectious (I), and recovered (R). If an individual is in the susceptible state, we can assume they are healthy but have no immunity. If they are in the exposed state, they have been infected with the virus but are not infectious. If they are infectious, they can actively transmit the disease. An individual who is infected ultimately either recovers or dies. We assume that a recovered individual’s chances of re-infection is low, but not zero. We can model the movement of individuals through these various states at each time period. The model’s exact specifications depend on its parameters, which we describe in the next section.</p>
+
+<p><em>2020-06-24 Update:</em> For our SEIR implementation, we use a discrete-time state machine where each step is a day in the simulation. For each day, we have a probability distribution for which individuals in each S/E/I/R state may transition to another S/E/I/R state. For example, we have a probability distribution for when a currently-infected individual will transmit the virus, and another probability distribution for when an infected individual will succumb to the disease. These distributions are then convolved with the total existing cases to determine the number of new infections and new deaths per day. For new infections, we multiple the convolution by R<sub>0</sub>, while for deaths, we multiple the convolution by the mortality rate.</p>
+
+
+
+<h2 id="assumptions">Assumptions</h2>
+
+<p>Please see the <a href="https://covid19-projections.com/about#assumptions">About</a> page to read about the assumptions in our model.</p>
+
+<h2 id="data">Data</h2>
+
+<p>The sole data source we use is the daily reported deaths from <a href="https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_daily_reports">Johns Hopkins CSSE</a>. In addition, we use population data for each state/country to calculate the total susceptible population.</p>
+
+<p>Because the raw data may be noisy, we must first run a smoothing algorithm to smooth the data. For example, if a state reports 0 death on one day and 300 deaths the next day, we smooth the data to show 150 deaths on each day.</p>
+
+<h2 id="parameters">Parameters</h2>
+
+<p>For our SEIR model, there are basic inputs/parameters that must be set to begin simulation. Gabriel Goh’s <a href="https://gabgoh.github.io/COVID/index.html">Epidemic Calculator</a> or University of Basel’s <a href="https://covid19-scenarios.org/">covid19-scenarios.org</a> provide good visualizations of sample inputs/parameters into a simulation. We chose a set of parameters that we think are important for the accuracy of the simulation. We divide the parameters into two categories:</p>
+
+<h3 id="category-1-fixed-parameters">Category 1: Fixed parameters</h3>
+
+<p>Fixed parameters are those that are fixed for this particular COVID-19 epidemic and likely do not fluctuate significantly across countries/states/regions. These include the following:</p>
+<ul>
+  <li>Latency period</li>
+  <li>Infectious period</li>
+  <li>Time between illness onset to hospitalization</li>
+  <li>Time between illness onset to death</li>
+  <li>Hospital stay time</li>
+  <li>Time to recovery</li>
+</ul>
+
+<p>We use various reports and publications to determine the best values for these fixed parameters. Most of these sources reference studies from Wuhan, China, where the epidemic first began in December 2019. While it is possible that the exact values may fluctuate slightly from region to region, we believe that the impacts these fluctuations have are minimal compared to the variable parameters.</p>
+
+<h3 id="category-2-variable-parameters">Category 2: Variable parameters</h3>
+
+<p>Variable parameters are those that may change depending on the country/state/region. Some examples are the following:</p>
+<ul>
+  <li>R<sub>0</sub> - the basic reproduction number</li>
+  <li>Mortality rate</li>
+  <li>Imports of positive cases per day</li>
+  <li>Mitigation effects (i.e. post-mitigation R)</li>
+  <li>Lockdown fatigue factor</li>
+  <li>Lifting of shelter-at-home orders (i.e. post-reopening R)</li>
+  <li>Population</li>
+</ul>
+
+<p>While the population of a region can be easily looked up, the other variable parameters are not easily retrievable. We will allocate the majority of our resources towards estimating the most sensible values for these parameters for each region.</p>
+
+<h4 id="modeling-the-r-value">Modeling the R value</h4>
+
+<p>To model the effects of mitigation strategies such as shelter-at-home/lockdown orders, we use three different R values in our model:</p>
+
+<p>1) R<sub>0</sub>: the initial R before mitigation strategy
+2) post-mitigation R: the R after mitigation strategy
+3) post-reopening R: the R after mitigation strategy has been relaxed</p>
+
+<p>Note that the mitigation strategy can encompass a wide variety of strategies, ranging from a complete lockdown as we’ve seen in Wuhan, China, to a more relaxed strategy as we’ve seen in Sweden.</p>
+
+<p>These R values are unknown ahead of time, and will be learned by the model. We use an inverse logistic function to model the transition between R<sub>0</sub> and post-mitigation R. We chose the inverse logistic function based on <a href="https://twitter.com/status/1248844841733128192">subway ridership data</a> from New York City and California. The shift and the slope of this function is also learned based on the data. For example, we learned that the downward slope of the inverse logistic function is steeper in New York than in Sweden, which matches our intuition that New Yorkers began social distancing at a quicker pace.</p>
+
+<p>We assume that the post-reopening R is greater or equal to the post-mitigation R.</p>
+
+<h2 id="parameter-search-using-machine-learning">Parameter Search using Machine Learning</h2>
+
+<p>As described in the previous section, determining the best values for variable parameters such as R<sub>0</sub>, the mortality rate, post-mitigation R, and post-reopening R will help us determine how COVID-19 will progress in a region. If we know what the “true” values of those parameters are, we can accurately simulate what is happening in the real world using our SEIR model. To determine these values, we use a simple machine learning technique called grid search.</p>
+
+<h3 id="parameter-optimization">Parameter Optimization</h3>
+
+<p>We found that a brute-force grid search method that iterates through the entire parameter space is the most effective in finding an optimal set of parameters. So if we have 10 values for R<sub>0</sub> and 10 values for the mortality rate, then there are 100 different parameter combinations for those two parameters. To optimize computation time, we prune unrealistic parameters (e.g. R<sub>0</sub> &gt; 10).</p>
+
+<p>For parameters where we do not have the data to estimate (e.g. we do not know the post-reopening R for regions that have not reopened), we consider all values equally, resulting in a wider confidence interval.</p>
+
+<h3 id="loss-function">Loss Function</h3>
+
+<p>To measure the error of a parameter set, we use a loss function that minimizes the error between our projected daily deaths and the actual daily deaths. We tried various loss functions such as mean squared error, absolute error, ratio error, and an ensemble of the aforementioned errors. We find that the mean squared error loss function consistently performs well on out-of-sample data. So for example, if we project 10, 9, 8 deaths for the next 3 days and the true deaths are 15, 5, 10, then our loss is: ((15-10)**2 + (5-9)**2 + (10-8)**2) / 3 = 15.</p>
+
+<p>In the early stages of our model when we do not have much out-of-sample data to work with, we try our best to take advantage of the data from countries such as China, Italy, and Spain, whose progression is much further along than the US.</p>
+
+<p>It is also important to limit the number of free variables. For example, it would be very difficult to try to determine 5 free variables when you only have 20 days of data. Therefore, for some of the variable parameters, we try varying one parameter at a time while holding all other parameters constant. This allows us to improve the signal-to-noise ratio when doing parameter search.</p>
+
+<h3 id="confidence-intervals">Confidence Intervals</h3>
+
+<p>We are able to generate confidence intervals for each region based on the projections generated by a given set of parameters. We exponentially weight each projection based on the loss. As a result, more accurate parameter sets in-sample receive a higher weight. We also prune the parameter set to get rid of the lowest-scoring 85-95% of projections. We then sort the projections generated from these parameter sets and apply a percentile to the projections to create our confidence intervals for each day. This method has roots in Bayneisan inference.</p>
+
+<p>For US country-wide projections, we combine the confidence intervals for each state adapted from the standard technique described <a href="http://sphweb.bumc.bu.edu/otlt/MPH-Modules/BS/BS704_Confidence_Intervals/BS704_Confidence_Intervals5.html">here</a>. Because we cannot assume independence between samples, we modify the formula from squaring the standard errors to taking the <code class="language-plaintext highlighter-rouge">n</code>th power, where <code class="language-plaintext highlighter-rouge">n</code> is a variable between 1 and 2 (inclusive). <code class="language-plaintext highlighter-rouge">n=1</code> equates to complete dependence (i.e. simply adding the confidence intevals), while <code class="language-plaintext highlighter-rouge">n=2</code> assumes complete independence. We use <code class="language-plaintext highlighter-rouge">n=1</code> to combine our confidence intervals prior to June 9, 2020 and <code class="language-plaintext highlighter-rouge">n=1.1</code> since.</p>
+
+<p>Note: Our daily deaths confidence intervals are meant to be looked at from a rolling mean basis, rather than a daily incident basis. For example, if a state reports deaths every other day (e.g. 0, 200, 0, 100), a confidence interval that covers daily incident deaths can only use [0, 200], which is not very informative. A confidence interval such as [55, 95] would be more informative, despite not overlapping with any of the four daily incident deaths. Hence, we recommend using a 7-day rolling mean when evaluating our confidence intervals.</p>
+
+<h3 id="validation-techniques">Validation Techniques</h3>
+
+<p>For any machine learning model, it is important to minimize overfitting. This model is no exception. In fact, due to the limited amount of data (e.g. if a region reported its first death 10 days ago, we only have 10 data points), it is very easy to overfit if we are not careful. That’s why we have developed a robust validation system that allows us to test various changes in a controlled environment such that overfitting is minimized. We can set our model to run on the first 20 days of data and compare the performance on the next 10 days. We can then repeat this process by running it on the first 21 days and comparing the performance on the next 9 days, and so forth. This allows us to perform cross-validation while preserving the maximum amount of data in our training set. While this technique does not ensure uniqueness of the test days data, we found that it is helpful to use multiple test days to reduce day-to-day data noisiness.</p>
+
+<p>We use our validation techniques to test out various model-specific hyperparameters and functions. For example, we can try various loss functions (e.g. mean square error, mean absolute error, ratio error) and pick the one with the lowest validation error. We also use validation to determine parameters such as the alpha for exponential decay of data points, or the infectious period of COVID-19. We continuously perform validation to ensure that the parameters we select are truly meaningful and predictive, rather than simply being a product of overfitting.</p>
+
+<h2 id="putting-it-all-together">Putting it All Together</h2>
+
+<p>For each region, we run our optimizer on the data to score each set of parameters. After some additional validation techniques described above, we aggregate the forecasts generated by each set of parameter, giving higher weights to parameters that have a lower error. This approach was inspired by the Monte Carlo method, allowing us to simulate the future while incorporating the inherent uncertainty. We now have our projections.</p>
+
+
+-->
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="">Back to Top</a></span>
+    <br>
+    <span class="site-footer-owner"><i>View the projection here <a href="https://github.com/shinycom/SanDiego-Covid19-Prediction" target="_blank"> GitHub </a></i>. Created by <a href="https://shinycom.github.io/" target="_blank">Shiniycom Liang Xu </a></span>
+      </footer>
+    </main>
+  
+
+</body></html>
