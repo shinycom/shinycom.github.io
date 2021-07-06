@@ -71,7 +71,7 @@ The daily new cases data are collected from <a href="https://www.sandiegouniontr
 <h2 id="Details">Model Details </h2>
 
 
-<p>Covid19 is essentiall a time serielas task. In order to predict Covid pandemic in San Diego, we utilized Susceptible-Exposed-Infectious-Recovered (SEIR) model. <a href="https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology"> Wiki </a> provides history and evolution of various caompartmental models in epidemiology. Essentially, this machine learning task is essentially a time series problem : at each time step (each day), we need to predict the number of new patients and deathes. There are four states : susceptible (E), exposed (E), infectious (I) and recovered (R), which are chained similar to a Makov Chain. An individual in a population at each day only stay in one of those four states and transit into another state in the next time step with a possibility. Population in each state is constrained with four differential equations. See <a href="http://epirecip.es/epicookbook/chapters/seir/intro">here</a> for equationa for detials. By tunning paramters, the prediction curve is able to model behavior of covid19 virus spread. <a href="https://gabgoh.github.io/COVID/index.html"> This interactive animation </a> illustrates the power of SEIR model. 
+<p>In order to predict Covid pandemic in San Diego, we utilized Susceptible-Exposed-Infectious-Recovered (SEIR) model. <a href="https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology"> Wiki </a> provides history and evolution of various caompartmental models in epidemiology. Essentially, this machine learning task is a time series problem : at each time step (each day), we need to predict the number of new patients and deathes. There are four states : susceptible (E), exposed (E), infectious (I) and recovered (R), which are chained similar to a Makov Chain. An individual in a population at each day only stay in one of those four states and transit into another state in the next time step with a possibility. Population in each state is constrained with four differential equations. See <a href="http://epirecip.es/epicookbook/chapters/seir/intro">here</a> for equationa for detials. By tunning paramters, the prediction curve is able to model behavior of covid19 virus spread. <a href="https://gabgoh.github.io/COVID/index.html"> This interactive animation </a> illustrates the power of SEIR model. 
 
 <p>We have built and optimized a SEIR model <a href="https://github.com/shinycom/SanDiego-Covid19-Prediction">open source</a> for prediting COVID19 in San Diego. In detials, at beginning, all population stay in Susceptible(S) state. With a certain number of patients infected with virus introducted each day, some people get exposed (E). Then part becomes ill and infectious (I) after days. Eventually, a small potion of patients passed away while others got recovered (R). The population in each S/E/I/R state constrained by model equations under control of parameters. By tunning key paramters, we are driving SEIR model to mimic reality and then for prediction of the new cases and deathes in the next period. Note that the transition among S/E/I/R states have a probality distribution and the real data of new cases and deathes reported have some delay and noisy. We utilized a certain logic to handle such kinds of unvertainty in our codes for the best performance.  
 </p>
@@ -98,7 +98,7 @@ The daily new cases data are collected from <a href="https://www.sandiegouniontr
 <h2 id="summary">Summary</h2>
 
 
-<p>For an open San Diego county, we have set up SEIR model and run our optimizer on the reported data to mimic epidemic situation in our local city. Compared with real data, our optimized model is able to describle what had happened in past and what maybe happen in the future. After most people got vaccined, the situation will change. And that is our future work. </p>
+<p>We have set up SEIR model and run our optimizer on the reported data to mimic epidemic situation in San Diego. Compared with real data, our optimized model is able to describle what had happened in the past and what maybe happen in the future. After most people got vaccinated, the situation will change. And that is our future work. </p>
 
 
 <!--
@@ -219,7 +219,7 @@ For our SEIR implementation, we use a discrete-time state machine where each ste
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="">Back to Top</a></span>
     <br>
-    <span class="site-footer-owner"><i>View the projection here <a href="https://github.com/shinycom/SanDiego-Covid19-Prediction" target="_blank"> GitHub </a></i>. Created by <a href="https://shinycom.github.io/" target="_blank">Shiniycom Liang Xu </a></span>
+    <span class="site-footer-owner"><i>View the projection here <a href="https://github.com/shinycom/SanDiego-Covid19-Prediction" target="_blank"> GitHub </a></i>. Created by <a href="https://shinycom.github.io/" target="_blank">Liang Xu </a></span>
       </footer>
     </main>
   
