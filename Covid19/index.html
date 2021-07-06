@@ -17,7 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#377878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="stylesheet" href="../COVID-19 Projections Using Machine Learning_files/style.css">
+    <link rel="stylesheet" href="../Covid19/COVID-19 Projections Using Machine Learning_files/style.css">
 
 <style>
 .center {
@@ -63,7 +63,7 @@ The daily new cases data are collected from <a href="https://www.sandiegouniontr
 
 <h2 id="Results">Results </h2>
 
-<p><img src="../COVID-19 Projections Using Machine Learning_files/finalPic.png" alt="Prediction Results" class="center"></p>
+<p><img src="../Covid19/COVID-19 Projections Using Machine Learning_files/finalPic.png" alt="Prediction Results" class="center"></p>
 
 <p> We plotted the predicted curve vs reported daily new cases of Covid19 in San Deigo County. In order to get better results, the model is running earlier than the first reported case in San Diego as we assuming the portential infected patient data are not collected or ignored at the very beginning stage. Notice that the reported data is fluctuated and full of noise because the delayed, misleading, and faulty cases are shown in the reported data. That is reality. The output data from the model has utilized convolution filter to smooth output curve and mimic the reported data, thus minimizing cost fuction and achieving the best prediction results. More details are shown in python codes <a href="https://github.com/shinycom/SanDiego-Covid19-Prediction">here</a>
 </p>
